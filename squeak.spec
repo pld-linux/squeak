@@ -36,7 +36,7 @@ którego efektywno¶æ jest porównywalna z komercyjnymi Smalltalkami.
 Summary:	extra libraries for Squeak 2.X
 Summary(pl):	dodatkowe biblioteki dla Squeaka 2.X
 Group:		Development/Languages
-Requires:	%{name}
+Requires:	%{name} = %{version}-%{release}
 
 %description extras
 A set of extra shared-libraries for Squeak: Squeak3D and
@@ -48,11 +48,15 @@ SoundCodecPrisms
 
 %package -n mozilla-plugin-squeak
 Summary:	Plugin to run Squeak in your browser
+Summary(pl):	Wtyczka do uruchamiania Squeaka w przegl±darce
 Group:		Development/Languages
-Requires:	%{name}
+Requires:	%{name} = %{version}-%{release}
 
 %description -n mozilla-plugin-squeak
-Plugin to run Squeak in your browser
+Plugin to run Squeak in your browser.
+
+%description -n mozilla-plugin-squeak -l pl
+Wtyczka do uruchamiania Squeaka w przegl±darce.
 
 %prep
 %setup -q -c -a1
@@ -83,7 +87,9 @@ install -d $RPM_BUILD_ROOT{%{_libdir},%{_datadir}/squeak,%{_bindir}}
 
 cd Squeak-%{vmver}/bld
 
-%{__make} install ROOT=$RPM_BUILD_ROOT
+%{__make} install \
+	ROOT=$RPM_BUILD_ROOT
+
 install %{SOURCE2} $RPM_BUILD_ROOT%{_datadir}/squeak
 install Squeak3.6-5429-full.changes $RPM_BUILD_ROOT%{_datadir}/squeak/squeak.changes
 install Squeak3.6-5429-full.image $RPM_BUILD_ROOT%{_datadir}/squeak/squeak.image
@@ -99,17 +105,22 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/*
-%{_mandir}/man1/squeak.1.gz
+%dir %{_libdir}/squeak
+%dir %{_libdir}/squeak/%{vmver}
 %attr(755,root,root) %{_libdir}/squeak/%{vmver}/squeak
+%dir %{_datadir}/squeak
 %attr(755,root,root) %{_datadir}/squeak/squeak.changes
 %attr(755,root,root) %{_datadir}/squeak/squeak.image
+# ??? duplicates
 %{_datadir}/squeak
+%{_mandir}/man1/squeak.1*
 
 %files extras
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/squeak/%{vmver}/*Plugin
 
 %files -n mozilla-plugin-squeak
+%defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/squeak/%{vmver}/npsqueakrun
 %attr(755,root,root) %{_libdir}/squeak/npsqueakregister
 %attr(755,root,root) %{_libdir}/squeak/%{vmver}/npsqueak.so
