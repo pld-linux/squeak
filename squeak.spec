@@ -14,6 +14,8 @@ Source2:	ftp://st.cs.uiuc.edu/Smalltalk/Squeak/%{version}/SqueakV3.sources.gz
 # Sources2-md5:	03791c6e87f032230d55249dcc9ac3c9
 Source4:	%{name}-install
 URL:		http://www.squeak.org/
+BuildRequires:	autoconf
+BuildRequires:	automake
 BuildRequires:	XFree86-devel
 BuildRequires:	unzip
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
