@@ -3,7 +3,7 @@ Summary(pl):	Interpreter Smalltalka dla X Window System
 Name:		squeak
 Version:	2.6
 Release:	1
-Copyright:	partially GPL
+License:	partially GPL
 Group:		Development/Languages
 Group(de):	Entwicklung/Sprachen
 Group(pl):	Programowanie/Jêzyki
@@ -67,11 +67,11 @@ install %{SOURCE2} $RPM_BUILD_ROOT%{_datadir}/squeak/squeak.changes.gz
 install %{SOURCE3} $RPM_BUILD_ROOT%{_datadir}/squeak
 gzip -d $RPM_BUILD_ROOT%{_datadir}/squeak/*.gz
 
-%post	extras -p /sbin/ldconfig
-%postun	extras -p /sbin/ldconfig
-
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%post	extras -p /sbin/ldconfig
+%postun	extras -p /sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
