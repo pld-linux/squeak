@@ -1,0 +1,17 @@
+#!/bin/sh
+if [ "$1" = "" ]; then
+	DIR="$HOME/squeak"
+else
+	DIR="$1"
+fi
+echo -n "Creating directory: $DIR..."
+mkdir -p "$DIR" && echo "done" || (echo "failed" ; exit -1)
+cd "$DIR"
+echo -n "Copying image..."
+cp -f /usr/share/squeak/Squeak2.6.image ./squeak.image && echo "done" || (echo "failed" ; exit -1)
+echo -n "Copying changes..."
+cp -f /usr/share/squeak/Squeak2.6.changes ./squeak.changes && echo "done" || (echo "failed" ; exit -1)
+echo -n "Linking sources..."
+ln -sf /usr/share/squeak/SqueakV2.sources . && echo "done" || (echo "failed" ; exit -1)
+echo "Done."
+exit 0
