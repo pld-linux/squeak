@@ -4,7 +4,7 @@ Name:		squeak
 Version:	2.6
 Release:	1
 Copyright:	partially GPL
-Group:		Developement/Languages
+Group:		Development/Languages
 Group(pl):	Programowanie/Jêzyki
 Source0:	http://www-sor.inria.fr/~piumarta/squeak/unix/release/Squeak%{version}-src.tar.gz
 Source1:	http://www-sor.inria.fr/~piumarta/squeak/unix/release/Squeak%{version}.image.gz
@@ -32,7 +32,7 @@ którego efektywno¶æ jest porównywalna z komercyjnymi Smalltalkami.
 %package extras
 Summary:	extra libraries for Squeak 2.X
 Summary(pl):	dodatkowe biblioteki dla Squeaka 2.X
-Group:		Developement/Languages
+Group:		Development/Languages
 Group(pl):	Programowanie/Jêzyki
 Requires:	%{name}
 
