@@ -47,7 +47,7 @@ Zestaw dodatkowych bibliotek dla Squeaka: Squeak3D oraz SoundCodecPrisms
 
 %build
 cd %{_misc_version}
-make VMBUILD=bin TARGET=bin CCFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s"
+%{__make} VMBUILD=bin TARGET=bin CCFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s"
 
 %install
 cd %{_misc_version}
