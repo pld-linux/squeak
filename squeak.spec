@@ -60,8 +60,8 @@ install -s bin/SqueakVM-2.4c-bin $RPM_BUILD_ROOT%{_bindir}/squeak
 install util/{sq,qs}cat $RPM_BUILD_ROOT%{_bindir}
 install %{SOURCE4} $RPM_BUILD_ROOT%{_bindir}/squeak-install
 install -s bin/*.so $RPM_BUILD_ROOT%{_libdir}
-install %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/squeak/squeak.image
-install %{SOURCE2} $RPM_BUILD_ROOT%{_datadir}/squeak/squeak.changes
+install %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/squeak/squeak.image.gz
+install %{SOURCE2} $RPM_BUILD_ROOT%{_datadir}/squeak/squeak.changes.gz
 install %{SOURCE3} $RPM_BUILD_ROOT%{_datadir}/squeak
 gzip -d $RPM_BUILD_ROOT%{_datadir}/squeak/*.gz
 
