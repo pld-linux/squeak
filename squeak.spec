@@ -1,6 +1,3 @@
-
-%define	_misc_version	2.4c
-
 Summary:	X Window System Smalltalk interpreter
 Summary(pl):	Interpreter Smalltalka dla X Window System
 Name:		squeak
@@ -9,7 +6,7 @@ Release:	1
 Copyright:	partially GPL
 Group:		Developement/Languages
 Group(pl):	Programowanie/Jêzyki
-Source0:	http://www-sor.inria.fr/~piumarta/squeak/unix/release/Squeak-%{_misc_version}-src.tar.gz
+Source0:	http://www-sor.inria.fr/~piumarta/squeak/unix/release/Squeak%{version}-src.tar.gz
 Source1:	http://www-sor.inria.fr/~piumarta/squeak/unix/release/Squeak%{version}.image.gz
 Source2:	http://www-sor.inria.fr/~piumarta/squeak/unix/release/Squeak%{version}.changes.gz
 Source3:	http://www-sor.inria.fr/~piumarta/squeak/unix/release/SqueakV2.sources.gz
