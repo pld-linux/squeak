@@ -5,12 +5,13 @@ Version:	2.6
 Release:	1
 Copyright:	partially GPL
 Group:		Development/Languages
+Group(de):	Entwicklung/Sprachen
 Group(pl):	Programowanie/Jêzyki
 Source0:	http://www-sor.inria.fr/~piumarta/squeak/unix/release/Squeak%{version}-src.tar.gz
 Source1:	http://www-sor.inria.fr/~piumarta/squeak/unix/release/Squeak%{version}.image.gz
 Source2:	http://www-sor.inria.fr/~piumarta/squeak/unix/release/Squeak%{version}.changes.gz
 Source3:	http://www-sor.inria.fr/~piumarta/squeak/unix/release/SqueakV2.sources.gz
-Source4:	squeak-install
+Source4:	%{name}-install
 URL:		http://www.squeak.org/
 BuildRequires:	XFree86-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -21,11 +22,11 @@ virtual machine is written entirely in Smalltalk, making it easy to
 debug, analyze, and change. To achieve practical performance, a
 translator produces an equivalent C program whose performance is
 comparable to commercial Smalltalks.
-	       
+
 %description -l pl
 Squeak jest otwart±, przeno¶n± implementacj± jêzyka Smalltalk-80, z
-maszyn± wirtualn± napisan± ca³kowicie w Smalltalku, dziêki czemu
-daje siê ona ³atwo poprawiaæ, analizowaæ i zmieniaæ. W celu osi±gniêcia
+maszyn± wirtualn± napisan± ca³kowicie w Smalltalku, dziêki czemu daje
+siê ona ³atwo poprawiaæ, analizowaæ i zmieniaæ. W celu osi±gniêcia
 praktycznej wydajno¶ci, translator produkuje odpowiedni program w C,
 którego efektywno¶æ jest porównywalna z komercyjnymi Smalltalkami.
 
@@ -33,37 +34,41 @@ którego efektywno¶æ jest porównywalna z komercyjnymi Smalltalkami.
 Summary:	extra libraries for Squeak 2.X
 Summary(pl):	dodatkowe biblioteki dla Squeaka 2.X
 Group:		Development/Languages
+Group(de):	Entwicklung/Sprachen
 Group(pl):	Programowanie/Jêzyki
 Requires:	%{name}
 
 %description extras
-A set of extra shared-libraries for Squeak: Squeak3D and SoundCodecPrisms
+A set of extra shared-libraries for Squeak: Squeak3D and
+SoundCodecPrisms
 
 %description -l pl extras
-Zestaw dodatkowych bibliotek dla Squeaka: Squeak3D oraz SoundCodecPrisms
+Zestaw dodatkowych bibliotek dla Squeaka: Squeak3D oraz
+SoundCodecPrisms
 
 %prep
 %setup -q -c -n %{name}-%{version}
 
 %build
 cd %{_misc_version}
-%{__make} VMBUILD=bin TARGET=bin CCFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s"
+%{__make} VMBUILD=bin TARGET=bin CCFLAGS="%{rpmcflags}" LDFLAGS="%{rpmldflags}"
 
 %install
+rm -rf $RPM_BUILD_ROOT
 cd %{_misc_version}
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_libdir},%{_datadir}/squeak,%{_bindir}}
-install -s bin/SqueakVM-2.4c-bin $RPM_BUILD_ROOT%{_bindir}/squeak
+install bin/SqueakVM-2.4c-bin $RPM_BUILD_ROOT%{_bindir}/squeak
 install util/{sq,qs}cat $RPM_BUILD_ROOT%{_bindir}
 install %{SOURCE4} $RPM_BUILD_ROOT%{_bindir}/squeak-install
-install -s bin/*.so $RPM_BUILD_ROOT%{_libdir}
+install bin/*.so $RPM_BUILD_ROOT%{_libdir}
 install %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/squeak/squeak.image.gz
 install %{SOURCE2} $RPM_BUILD_ROOT%{_datadir}/squeak/squeak.changes.gz
 install %{SOURCE3} $RPM_BUILD_ROOT%{_datadir}/squeak
 gzip -d $RPM_BUILD_ROOT%{_datadir}/squeak/*.gz
 
-%post extras -p /sbin/ldconfig
-%postun extras -p /sbin/ldconfig
+%post	extras -p /sbin/ldconfig
+%postun	extras -p /sbin/ldconfig
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -76,5 +81,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/squeak
 
 %files extras
+%defattr(644,root,root,755)
 %{_libdir}/Squeak3D.so
 %{_libdir}/SoundCodecPrims.so
