@@ -1,21 +1,21 @@
 Summary:	X Window System Smalltalk interpreter
 Summary(pl):	Interpreter Smalltalka dla X Window System
 Name:		squeak
-Version:	2.6
+Version:	3.6
 Release:	1
+%define	vmver 3.4-1
 License:	partially GPL
 Group:		Development/Languages
-Source0:	http://www-sor.inria.fr/~piumarta/squeak/unix/release/Squeak%{version}-src.tar.gz
-# Source0-md5:	7e0728d338d6464b9689ef69eade1c3f
-Source1:	http://www-sor.inria.fr/~piumarta/squeak/unix/release/Squeak%{version}.image.gz
-# Source1-md5:	eb2cfe3f6eb18df2fb49f8f66a6e6a5c
-Source2:	http://www-sor.inria.fr/~piumarta/squeak/unix/release/Squeak%{version}.changes.gz
-# Source2-md5:	46de633f17dee23b0c06d5ac62473c77
-Source3:	http://www-sor.inria.fr/~piumarta/squeak/unix/release/SqueakV2.sources.gz
-# Source3-md5:	03791c6e87f032230d55249dcc9ac3c9
+Source0:	ftp://st.cs.uiuc.edu/Smalltalk/Squeak/%{version}/unix-linux/Squeak-%{vmver}.src.tar.gz
+# Source0-md5:	780af1cf1cdc8d44c1ce30a527bdd508
+Source1:	ftp://st.cs.uiuc.edu/Smalltalk/Squeak/3.6/Squeak3.6-5429-full.zip
+# Source1-md5:	9a35fa39f2338d26a721564472d4d933
+Source2:	ftp://st.cs.uiuc.edu/Smalltalk/Squeak/%{version}/SqueakV3.sources.gz
+# Sources2-md5:	03791c6e87f032230d55249dcc9ac3c9
 Source4:	%{name}-install
 URL:		http://www.squeak.org/
 BuildRequires:	XFree86-devel
+BuildRequires:	unzip
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -46,44 +46,70 @@ SoundCodecPrisms
 Zestaw dodatkowych bibliotek dla Squeaka: Squeak3D oraz
 SoundCodecPrisms
 
+%package -n mozilla-plugin-squeak
+Summary:	Plugin to run Squeak in your browser
+Group:		Development/Languages
+Requires:	%{name}
+
+%description -n mozilla-plugin-squeak
+Plugin to run Squeak in your browser
+
 %prep
-%setup -q -c
+%setup -q -c -a1
 
 %build
-%{__make} -C %{_misc_version} \
-	VMBUILD=bin \
-	TARGET=bin \
-	CCFLAGS="%{rpmcflags}" \
-	LDFLAGS="%{rpmldflags}"
+cd Squeak-%{vmver}
+cd platforms/unix/config
+./mkacinc > acplugins.m4
+%{__aclocal}
+%{__autoconf}
+cd ../../..
+mkdir bld
+cd bld
+../platforms/unix/config/%{configure}
+cat <<EOF >disabledPlugins.c
+typedef struct {
+  char *pluginName;
+  char *primitiveName;
+  void *primitiveAddress;
+} sqExport;
+EOF
+%{__make} 
+unzip %{SOURCE1}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_libdir},%{_datadir}/squeak,%{_bindir}}
 
-cd %{_misc_version}
-install bin/SqueakVM-2.4c-bin $RPM_BUILD_ROOT%{_bindir}/squeak
-install util/{sq,qs}cat $RPM_BUILD_ROOT%{_bindir}
-install %{SOURCE4} $RPM_BUILD_ROOT%{_bindir}/squeak-install
-install bin/*.so $RPM_BUILD_ROOT%{_libdir}
-install %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/squeak/squeak.image.gz
-install %{SOURCE2} $RPM_BUILD_ROOT%{_datadir}/squeak/squeak.changes.gz
-install %{SOURCE3} $RPM_BUILD_ROOT%{_datadir}/squeak
+cd Squeak-%{vmver}/bld
+
+%{__make} install ROOT=$RPM_BUILD_ROOT
+install %{SOURCE2} $RPM_BUILD_ROOT%{_datadir}/squeak
+install Squeak3.6-5429-full.changes $RPM_BUILD_ROOT%{_datadir}/squeak/squeak.changes
+install Squeak3.6-5429-full.image $RPM_BUILD_ROOT%{_datadir}/squeak/squeak.image
+
 gzip -d $RPM_BUILD_ROOT%{_datadir}/squeak/*.gz
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post	extras -p /sbin/ldconfig
-%postun	extras -p /sbin/ldconfig
+%postun extras -p /sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/squeak*
-%attr(755,root,root) %{_bindir}/sqcat
-%attr(755,root,root) %{_bindir}/qscat
+%attr(755,root,root) %{_bindir}/*
+%{_mandir}/man1/squeak.1.gz
+%attr(755,root,root) %{_libdir}/squeak/%{vmver}/squeak
+%attr(755,root,root) %{_datadir}/squeak/squeak.changes
+%attr(755,root,root) %{_datadir}/squeak/squeak.image
 %{_datadir}/squeak
 
 %files extras
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/Squeak3D.so
-%attr(755,root,root) %{_libdir}/SoundCodecPrims.so
+%attr(755,root,root) %{_libdir}/squeak/%{vmver}/*Plugin
+
+%files -n mozilla-plugin-squeak
+%attr(755,root,root) %{_libdir}/squeak/%{vmver}/npsqueakrun
+%attr(755,root,root) %{_libdir}/squeak/npsqueakregister
+%attr(755,root,root) %{_libdir}/squeak/%{vmver}/npsqueak.so
