@@ -8,9 +8,9 @@ echo -n "Creating directory: $DIR..."
 install -d "$DIR" && echo "done" || (echo "failed" ; exit -1)
 cd "$DIR"
 echo -n "Copying image..."
-install /usr/share/squeak/Squeak2.6.image ./squeak.image && echo "done" || (echo "failed" ; exit -1)
+install /usr/share/squeak/squeak.image . && echo "done" || (echo "failed" ; exit -1)
 echo -n "Copying changes..."
-install /usr/share/squeak/Squeak2.6.changes ./squeak.changes && echo "done" || (echo "failed" ; exit -1)
+install /usr/share/squeak/squeak.changes . && echo "done" || (echo "failed" ; exit -1)
 echo -n "Linking sources..."
 ln -sf /usr/share/squeak/SqueakV2.sources . && echo "done" || (echo "failed" ; exit -1)
 echo "Done."
