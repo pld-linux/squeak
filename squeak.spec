@@ -16,7 +16,7 @@ Source3:	http://www-sor.inria.fr/~piumarta/squeak/unix/release/SqueakV2.sources.
 Source4:	squeak-install
 URL:		http://www.squeak.org/
 BuildRequires:	XFree86-devel
-BuildRoot:	/tmp/%{name}-%{version}-root
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 Squeak is an open, highly-portable Smalltalk-80 implementation whose
