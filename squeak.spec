@@ -47,17 +47,20 @@ Zestaw dodatkowych bibliotek dla Squeaka: Squeak3D oraz
 SoundCodecPrisms
 
 %prep
-%setup -q -c -n %{name}-%{version}
+%setup -q -c
 
 %build
-cd %{_misc_version}
-%{__make} VMBUILD=bin TARGET=bin CCFLAGS="%{rpmcflags}" LDFLAGS="%{rpmldflags}"
+%{__make} -C %{_misc_version} \
+	VMBUILD=bin \
+	TARGET=bin \
+	CCFLAGS="%{rpmcflags}" \
+	LDFLAGS="%{rpmldflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-cd %{_misc_version}
-rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_libdir},%{_datadir}/squeak,%{_bindir}}
+
+cd %{_misc_version}
 install bin/SqueakVM-2.4c-bin $RPM_BUILD_ROOT%{_bindir}/squeak
 install util/{sq,qs}cat $RPM_BUILD_ROOT%{_bindir}
 install %{SOURCE4} $RPM_BUILD_ROOT%{_bindir}/squeak-install
@@ -82,5 +85,5 @@ rm -rf $RPM_BUILD_ROOT
 
 %files extras
 %defattr(644,root,root,755)
-%{_libdir}/Squeak3D.so
-%{_libdir}/SoundCodecPrims.so
+%attr(755,root,root) %{_libdir}/Squeak3D.so
+%attr(755,root,root) %{_libdir}/SoundCodecPrims.so
