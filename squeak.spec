@@ -42,7 +42,7 @@ Requires:	%{name}
 A set of extra shared-libraries for Squeak: Squeak3D and
 SoundCodecPrisms
 
-%description -l pl extras
+%description extras -l pl
 Zestaw dodatkowych bibliotek dla Squeaka: Squeak3D oraz
 SoundCodecPrisms
 
