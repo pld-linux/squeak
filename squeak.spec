@@ -1,3 +1,6 @@
+
+%define	_misc_version	2.4c
+
 Summary:	X Window System Smalltalk interpreter
 Summary(pl):	Interpreter Smalltalka dla X Window System
 Name:		squeak
@@ -6,12 +9,11 @@ Release:	1
 Copyright:	partially GPL
 Group:		Developement/Languages
 Group(pl):	Programowanie/Jêzyki
-Source0:	http://www-sor.inria.fr/~piumarta/squeak/unix/release/Squeak%{version}-src.tar.gz
+Source0:	http://www-sor.inria.fr/~piumarta/squeak/unix/release/Squeak-%{_misc_version}-src.tar.gz
 Source1:	http://www-sor.inria.fr/~piumarta/squeak/unix/release/Squeak%{version}.image.gz
 Source2:	http://www-sor.inria.fr/~piumarta/squeak/unix/release/Squeak%{version}.changes.gz
 Source3:	http://www-sor.inria.fr/~piumarta/squeak/unix/release/SqueakV2.sources.gz
 Source4:	squeak-install
-Patch:		squeak-Makefile.patch
 URL:		http://www.squeak.org/
 BuildRequires:	XFree86-devel
 BuildRoot:	/tmp/%{name}-%{version}-root
@@ -45,21 +47,23 @@ Zestaw dodatkowych bibliotek dla Squeaka: Squeak3D oraz SoundCodecPrisms
 
 %prep
 %setup -q -c -n %{name}-%{version}
-%patch -p0
 
 %build
-make
+cd %{_misc_version}
+make VMBUILD=bin TARGET=bin CCFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s"
 
 %install
+cd %{_misc_version}
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_libdir},%{_datadir}/squeak,%{_bindir}}
-install -s bin/squeak $RPM_BUILD_ROOT%{_bindir}
+install -s bin/SqueakVM-2.4c-bin $RPM_BUILD_ROOT%{_bindir}/squeak
 install util/{sq,qs}cat $RPM_BUILD_ROOT%{_bindir}
 install %{SOURCE4} $RPM_BUILD_ROOT%{_bindir}/squeak-install
 install -s bin/*.so $RPM_BUILD_ROOT%{_libdir}
-install %{SOURCE1} %{SOURCE2} %{SOURCE3} $RPM_BUILD_ROOT%{_datadir}/squeak
+install %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/squeak/squeak.image
+install %{SOURCE2} $RPM_BUILD_ROOT%{_datadir}/squeak/squeak.changes
+install %{SOURCE3} $RPM_BUILD_ROOT%{_datadir}/squeak
 gzip -d $RPM_BUILD_ROOT%{_datadir}/squeak/*.gz
-gzip -9nf LICENSE
 
 %post extras -p /sbin/ldconfig
 %postun extras -p /sbin/ldconfig
@@ -69,7 +73,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc LICENSE.gz
 %attr(755,root,root) %{_bindir}/squeak*
 %attr(755,root,root) %{_bindir}/sqcat
 %attr(755,root,root) %{_bindir}/qscat
