@@ -6,9 +6,13 @@ Release:	1
 License:	partially GPL
 Group:		Development/Languages
 Source0:	http://www-sor.inria.fr/~piumarta/squeak/unix/release/Squeak%{version}-src.tar.gz
+# Source0-md5:	7e0728d338d6464b9689ef69eade1c3f
 Source1:	http://www-sor.inria.fr/~piumarta/squeak/unix/release/Squeak%{version}.image.gz
+# Source1-md5:	eb2cfe3f6eb18df2fb49f8f66a6e6a5c
 Source2:	http://www-sor.inria.fr/~piumarta/squeak/unix/release/Squeak%{version}.changes.gz
+# Source2-md5:	46de633f17dee23b0c06d5ac62473c77
 Source3:	http://www-sor.inria.fr/~piumarta/squeak/unix/release/SqueakV2.sources.gz
+# Source3-md5:	03791c6e87f032230d55249dcc9ac3c9
 Source4:	%{name}-install
 URL:		http://www.squeak.org/
 BuildRequires:	XFree86-devel
