@@ -1,5 +1,5 @@
 Summary:	X Window System Smalltalk interpreter
-Summary(pl.UTF-8):   Interpreter Smalltalka dla X Window System
+Summary(pl.UTF-8):	Interpreter Smalltalka dla X Window System
 Name:		squeak
 Version:	3.6
 Release:	1
@@ -36,7 +36,7 @@ którego efektywność jest porównywalna z komercyjnymi Smalltalkami.
 
 %package extras
 Summary:	extra libraries for Squeak 2.X
-Summary(pl.UTF-8):   dodatkowe biblioteki dla Squeaka 2.X
+Summary(pl.UTF-8):	dodatkowe biblioteki dla Squeaka 2.X
 Group:		Development/Languages
 Requires:	%{name} = %{version}-%{release}
 
@@ -50,7 +50,7 @@ SoundCodecPrisms
 
 %package -n mozilla-plugin-squeak
 Summary:	Plugin to run Squeak in your browser
-Summary(pl.UTF-8):   Wtyczka do uruchamiania Squeaka w przeglądarce
+Summary(pl.UTF-8):	Wtyczka do uruchamiania Squeaka w przeglądarce
 Group:		Development/Languages
 Requires:	%{name} = %{version}-%{release}
 
