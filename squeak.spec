@@ -1,5 +1,5 @@
 Summary:	X Window System Smalltalk interpreter
-Summary(pl):	Interpreter Smalltalka dla X Window System
+Summary(pl.UTF-8):   Interpreter Smalltalka dla X Window System
 Name:		squeak
 Version:	3.6
 Release:	1
@@ -27,16 +27,16 @@ debug, analyze, and change. To achieve practical performance, a
 translator produces an equivalent C program whose performance is
 comparable to commercial Smalltalks.
 
-%description -l pl
-Squeak jest otwart±, przeno¶n± implementacj± jêzyka Smalltalk-80, z
-maszyn± wirtualn± napisan± ca³kowicie w Smalltalku, dziêki czemu daje
-siê ona ³atwo poprawiaæ, analizowaæ i zmieniaæ. W celu osi±gniêcia
-praktycznej wydajno¶ci, translator produkuje odpowiedni program w C,
-którego efektywno¶æ jest porównywalna z komercyjnymi Smalltalkami.
+%description -l pl.UTF-8
+Squeak jest otwartÄ…, przenoÅ›nÄ… implementacjÄ… jÄ™zyka Smalltalk-80, z
+maszynÄ… wirtualnÄ… napisanÄ… caÅ‚kowicie w Smalltalku, dziÄ™ki czemu daje
+siÄ™ ona Å‚atwo poprawiaÄ‡, analizowaÄ‡ i zmieniaÄ‡. W celu osiÄ…gniÄ™cia
+praktycznej wydajnoÅ›ci, translator produkuje odpowiedni program w C,
+ktÃ³rego efektywnoÅ›Ä‡ jest porÃ³wnywalna z komercyjnymi Smalltalkami.
 
 %package extras
 Summary:	extra libraries for Squeak 2.X
-Summary(pl):	dodatkowe biblioteki dla Squeaka 2.X
+Summary(pl.UTF-8):   dodatkowe biblioteki dla Squeaka 2.X
 Group:		Development/Languages
 Requires:	%{name} = %{version}-%{release}
 
@@ -44,21 +44,21 @@ Requires:	%{name} = %{version}-%{release}
 A set of extra shared-libraries for Squeak: Squeak3D and
 SoundCodecPrisms
 
-%description extras -l pl
+%description extras -l pl.UTF-8
 Zestaw dodatkowych bibliotek dla Squeaka: Squeak3D oraz
 SoundCodecPrisms
 
 %package -n mozilla-plugin-squeak
 Summary:	Plugin to run Squeak in your browser
-Summary(pl):	Wtyczka do uruchamiania Squeaka w przegl±darce
+Summary(pl.UTF-8):   Wtyczka do uruchamiania Squeaka w przeglÄ…darce
 Group:		Development/Languages
 Requires:	%{name} = %{version}-%{release}
 
 %description -n mozilla-plugin-squeak
 Plugin to run Squeak in your browser.
 
-%description -n mozilla-plugin-squeak -l pl
-Wtyczka do uruchamiania Squeaka w przegl±darce.
+%description -n mozilla-plugin-squeak -l pl.UTF-8
+Wtyczka do uruchamiania Squeaka w przeglÄ…darce.
 
 %prep
 %setup -q -c -a1
