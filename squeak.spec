@@ -1,23 +1,28 @@
+%define	vmver 3.4-1
 Summary:	X Window System Smalltalk interpreter
 Summary(pl.UTF-8):	Interpreter Smalltalka dla X Window System
 Name:		squeak
 Version:	3.6
-Release:	1
-%define	vmver 3.4-1
+Release:	2
 License:	partially GPL
 Group:		Development/Languages
 Source0:	ftp://st.cs.uiuc.edu/Smalltalk/Squeak/%{version}/unix-linux/Squeak-%{vmver}.src.tar.gz
 # Source0-md5:	780af1cf1cdc8d44c1ce30a527bdd508
-Source1:	ftp://st.cs.uiuc.edu/Smalltalk/Squeak/3.6/Squeak3.6-5429-full.zip
+Source1:	ftp://st.cs.uiuc.edu/Smalltalk/Squeak/%{version}/Squeak3.6-5429-full.zip
 # Source1-md5:	9a35fa39f2338d26a721564472d4d933
 Source2:	ftp://st.cs.uiuc.edu/Smalltalk/Squeak/%{version}/SqueakV3.sources.gz
 # Sources2-md5:	03791c6e87f032230d55249dcc9ac3c9
 Source4:	%{name}-install
+Patch0:		%{name}-lvalue-assignment.patch
 URL:		http://www.squeak.org/
+BuildRequires:	OpenGL-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	XFree86-devel
 BuildRequires:	unzip
+BuildRequires:	xorg-lib-libICE-devel
+BuildRequires:	xorg-lib-libSM-devel
+BuildRequires:	xorg-lib-libX11-devel
+BuildRequires:	xorg-lib-libXext-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -62,6 +67,7 @@ Wtyczka do uruchamiania Squeaka w przeglądarce.
 
 %prep
 %setup -q -c -a1
+%patch0 -p1
 
 %build
 cd Squeak-%{vmver}
@@ -80,7 +86,7 @@ typedef struct {
   void *primitiveAddress;
 } sqExport;
 EOF
-%{__make} 
+%{__make}
 unzip %{SOURCE1}
 
 %install

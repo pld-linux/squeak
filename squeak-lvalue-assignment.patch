@@ -1,0 +1,20 @@
+--- squeak-3.6/Squeak-3.4-1/platforms/unix/plugins/SocketPlugin/sqUnixSocket.c~	2003-01-31 12:02:24.000000000 +0100
++++ squeak-3.6/Squeak-3.4-1/platforms/unix/plugins/SocketPlugin/sqUnixSocket.c	2007-02-25 10:56:34.000000000 +0100
+@@ -572,7 +572,7 @@
+     {
+       fprintf(stderr, "socketStatus: freeing invalidated pss=%p\n", PSP(s));
+       /*free(PSP(s));*/	/* this almost never happens -- safer not to free()?? */
+-      PSP(s)= 0;
++      s= (SocketPtr)0;
+       interpreterProxy->success(false);
+       return Invalid;
+     }
+@@ -728,7 +728,7 @@
+       return;
+     }
+ 
+-  PSP(s)= pss;
++  s= (SocketPtr)pss;
+   pss->s= PSP(serverSocket)->acceptedSock;
+   PSP(serverSocket)->acceptedSock= -1;
+   SOCKETSTATE(serverSocket)= WaitingForConnection;
