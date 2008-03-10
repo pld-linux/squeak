@@ -11,7 +11,7 @@ Source0:	http://ftp.squeak.org/%{version}/unix-linux/Squeak-%{vmver}.src.tar.gz
 Source1:	http://ftp.squeak.org/%{version}/Squeak3.9.1-final-7075.zip
 # Source1-md5:	7e31017bdbcce0c5885db9bda9a12379
 Source2:	http://ftp.squeak.org/%{version}/SqueakV39.sources.gz
-# Sources2-md5:	03791c6e87f032230d55249dcc9ac3c9
+# Sources2-md5:	4fe515af7428dbe69e90126c78255db9
 Source4:	%{name}-install
 Patch0:		%{name}-lvalue-assignment.patch
 URL:		http://www.squeak.org/
