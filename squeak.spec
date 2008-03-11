@@ -3,7 +3,7 @@ Summary:	X Window System Smalltalk interpreter
 Summary(pl.UTF-8):	Interpreter Smalltalka dla X Window System
 Name:		squeak
 Version:	3.9
-Release:	1
+Release:	2
 License:	partially GPL
 Group:		Development/Languages
 Source0:	http://ftp.squeak.org/%{version}/unix-linux/Squeak-%{vmver}.src.tar.gz
@@ -98,9 +98,14 @@ cd Squeak-%{vmver}/bld
 %{__make} install \
 	ROOT=$RPM_BUILD_ROOT
 
-gzip -d -c %{SOURCE2} >$RPM_BUILD_ROOT%{_datadir}/squeak/squeak.sources
+sed -e "s|imgdir=.*|imgdir=%{_datadir}/squeak|" inisqueak > $RPM_BUILD_ROOT%{_bindir}/inisqueak
+
+install %{SOURCE2} $RPM_BUILD_ROOT%{_datadir}/squeak/
 install Squeak3.9.1-final-7075.changes $RPM_BUILD_ROOT%{_datadir}/squeak/squeak.changes
 install Squeak3.9.1-final-7075.image $RPM_BUILD_ROOT%{_datadir}/squeak/squeak.image
+
+gzip -d $RPM_BUILD_ROOT%{_datadir}/squeak/SqueakV*.sources.gz
+gzip -9 $RPM_BUILD_ROOT%{_datadir}/squeak/squeak.{changes,image}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -116,10 +121,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/squeak/%{vmver}/squeak
 %attr(755,root,root) %{_libdir}/squeak/%{vmver}/vm-*
 %dir %{_datadir}/squeak
-%attr(755,root,root) %{_datadir}/squeak/squeak.changes
-%attr(755,root,root) %{_datadir}/squeak/squeak.image
-%attr(755,root,root) %{_datadir}/squeak/squeak.sources
-%{_mandir}/man1/squeak.1*
+%attr(755,root,root) %{_datadir}/squeak/squeak.changes.gz
+%attr(755,root,root) %{_datadir}/squeak/squeak.image.gz
+%attr(755,root,root) %{_datadir}/squeak/SqueakV*.sources
+%{_mandir}/man1/*squeak.1*
 
 %files extras
 %defattr(644,root,root,755)
