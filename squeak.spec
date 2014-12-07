@@ -3,7 +3,7 @@ Summary:	X Window System Smalltalk interpreter
 Summary(pl.UTF-8):	Interpreter Smalltalka dla X Window System
 Name:		squeak
 Version:	3.9
-Release:	2
+Release:	3
 License:	partially GPL
 Group:		Development/Languages
 Source0:	http://ftp.squeak.org/%{version}/unix-linux/Squeak-%{vmver}.src.tar.gz
