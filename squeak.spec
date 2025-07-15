@@ -67,7 +67,7 @@ Wtyczka do uruchamiania Squeaka w przeglądarce.
 
 %prep
 %setup -q -c -a1
-%patch0 -p1
+%patch -P0 -p1
 
 %build
 cd Squeak-%{vmver}
